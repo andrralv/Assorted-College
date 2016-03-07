@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalogo>
+    <filme>
+        <codigo>3123</codigo>
+        <nombre>Kill Bill 2: La Venganza de Bill</nombre>
+    </filme>
+    <filme>
+        <codigo>3212</codigo>
+        <nombre>Cheech and Chong's Up In Smoke</nombre>
+    </filme>
+    <filme>
+        <codigo>4213</codigo>
+        <nombre>Neon Genesis Evangelion: Coleccion 1</nombre>
+    </filme>
+    <filme>
+        <codigo>4323</codigo>
+        <nombre>The Revenant</nombre>
+    </filme>
+    <filme>
+        <codigo>4321</codigo>
+        <nombre>Star Wars: The Force Awakens</nombre>
+    </filme>
+    <filme>
+        <codigo>2312</codigo>
+        <nombre>Forrest Gump</nombre>
+    </filme>
+    <filme>
+        <codigo>8432</codigo>
+        <nombre>Her</nombre>
+    </filme>
+    <filme>
+        <codigo>2121</codigo>
+        <nombre>Being John Malkovich</nombre>
+    </filme>
+    <filme>
+        <codigo>6544</codigo>
+        <nombre>It's always sunny in Philadelphia: Season 1</nombre>
+    </filme>
+    <filme>
+        <codigo>4391</codigo>
+        <nombre>The Martian</nombre>
+    </filme>
+    <filme>
+        <codigo>6434</codigo>
+        <nombre>The Devil and Daniel Johnston</nombre>
+    </filme>
+    <filme>
+        <codigo>6666</codigo>
+        <nombre>Lost In Translation</nombre>
+    </filme>
+    <filme>
+        <codigo>5433</codigo>
+        <nombre>vicepresidente: Tensión, fama y el deceso</nombre>
+    </filme>
+</catalogo>

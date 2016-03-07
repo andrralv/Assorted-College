@@ -1,0 +1,96 @@
+html{font-family:'Roboto', sans-serif;
+	background: #bf3131; /* Old browsers */
+        background: -moz-linear-gradient(top, #bf3131 0%, #f4fffb 78%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, #bf3131 0%,#f4fffb 78%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom, #bf3131 0%,#f4fffb 78%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bf3131', endColorstr='#f4fffb',GradientType=0 ); /* IE6-9 */
+	margin: 0 0  auto;
+	padding: 0 0 auto;
+	overflow-x: hidden;
+        overflow-y: hidden;}
+
+#imagenHeader{background-image: url("../images/banner.png");
+            background-repeat: no-repeat;
+            padding: 30px;
+            margin: 20px}
+
+section {padding-right:260px;
+        padding-left: 250px;
+        padding-top: 100px;
+        text-align: center;}
+
+header {padding-left:13%}
+
+header h3{padding-left: 11%;}
+
+#wrapper {max-width: 800px;
+    padding-left: 20%;
+    min-height:560px;}
+
+nav ul{list-style-type: none;
+       margin: 0;
+       padding: 0;
+    }
+    
+nav li {float: left;
+    padding: 10px;}
+
+nav {padding-left:24%;
+    color: white;
+    background-color: black;
+    margin-top:-30px;}
+    
+footer {background-color: black;
+        color: white;
+        padding-bottom: 20px;
+        margin: -10px}
+
+table {border-style: solid;
+    border: 1px;}
+
+footer h5 {padding-left: 510px;
+        padding-top: 20px;}
+
+a {text-decoration: none;
+    color:black;}
+
+a:hover {color:white;}
+
+#tableWrapper {position: fixed;
+               left: 200px;
+               right: 200px;
+               top: 200px;
+               bottom: 150px;
+                background-color: #E2E2E2;
+                border-style: solid;
+                border-color: black;
+                overflow-y: scroll;
+                text-align: left;}
+
+hr {color: white;}
+
+#titulo {padding-left: 10px;
+        margin-bottom: -5px;
+        margin-top: 0px;}
+
+#filme {color: #6B0C0C;
+        overflow: hidden;}
+
+#titulo {position:fixed;
+        background-color: black;
+        color: white;
+        padding-right: 796px}
+
+#nombre, #usuario, #email {display: inline;
+                            color: #6B0C0C;
+                            text-decoration: underline;}
+
+#bottomMessage {text-align: center;
+                margin-bottom: 25px;
+                padding-right: 25px;
+                margin-top: -50px;}
+
+#formWrapper {position:fixed;
+        left: 320px;
+        bottom: 120px;}
+
