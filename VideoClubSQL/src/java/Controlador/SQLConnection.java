@@ -1,16 +1,19 @@
 package Controlador;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import com.mysql.jdbc.Driver;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class SQLConnection {
+    // clase controladora para la logica del programa
+    
     public SQLConnection() throws SQLException, ClassNotFoundException {
         makeConnection();
         Class.forName("com.mysql.jdbc.Driver");
     } 
     private Connection myConnect;  
+    // crea una conexion con la base de datos
+    // si la conexion da timeout, se debe ingresar a AWS y permitir
+    // esta direccion IP
     public Connection makeConnection() throws SQLException {
         if (myConnect == null) {
             new Driver();
@@ -23,6 +26,8 @@ public class SQLConnection {
         return myConnect;
     }  
     public boolean checkUser(String requestSt) throws SQLException, ClassNotFoundException {
+        // revisa si un usuario ya existe en el registro
+        // si retorna true no permite al usuario registrar
         boolean bool = false;
         SQLConnection conn = new SQLConnection();
         try {
@@ -42,6 +47,7 @@ public class SQLConnection {
         return bool;
         }
     public boolean newUser (String username, String password, String fullName, String email) throws Exception{
+        // ingresa un nuevo usuario en la base de datos
         SQLConnection conn = new SQLConnection();
         try {
             Statement stmt = conn.myConnect.createStatement();
@@ -55,6 +61,8 @@ public class SQLConnection {
         }
     }
     public boolean login (String username, String password) throws Exception {
+        // checkea si los credenciales ingresados
+        // existen en la base de datos
         boolean bool = false;
         SQLConnection conn = new SQLConnection();
         try {
@@ -74,6 +82,8 @@ public class SQLConnection {
         return bool;
     }
     public boolean checkNewClient (String user) throws Exception {
+        // checkea si un nuevo cliente ya existe en la base de datos
+        // si retorna true no permite al usuario registrar el nuevo usuario
         boolean bool = false;
         SQLConnection conn = new SQLConnection();
         try {
@@ -94,7 +104,8 @@ public class SQLConnection {
         return bool;
     }
     public boolean newClient (String user, String email, String name) throws Exception {
-        boolean bool = false;
+        // ingresa un nuevo cliente en la base de datos
+        boolean bool;
         SQLConnection conn = new SQLConnection();
         try {
             Statement stmt = conn.myConnect.createStatement();
@@ -108,58 +119,72 @@ public class SQLConnection {
     return bool;
     }
     
-    public void clientData() throws Exception {
+    public ArrayList clientData() throws Exception {
+        // crea una lista de objetos con los clientes en
+        // la base de datos. Devuelte el arraylist para
+        // desplegar la informacion de salida
+        Client cliente = null;
+        ArrayList cList = new Controlador.ClientList().lista;
         boolean bool = false;
         SQLConnection conn = new SQLConnection();
         try {
             Statement stmt = conn.myConnect.createStatement();
             String sqlStmt = "SELECT * FROM clientes;";
             ResultSet rs = stmt.executeQuery(sqlStmt);
+            rs.beforeFirst();
             while (rs.next()) {
                 String rsUserValue = rs.getString("clienteUser");
                 String rsEmailValue = rs.getString("clienteEmail");
                 String rsNameValue = rs.getString("clienteNombre");
-                Client cliente = new Client(rsUserValue, rsEmailValue, rsNameValue);
-                
+                cliente = new Client(rsUserValue, rsEmailValue, rsNameValue);
+                cList.add(cliente);
             }
             rs.close(); 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    return cList;
     }  
     
-    public void setFilm(int index, String filmName, String user) throws Exception {
+    public static void setFilm(String filmName, String user) throws Exception {
+        // agrega un nuevo filme a un cliente
         SQLConnection conn = new SQLConnection();
         try {
             Statement stmt = conn.myConnect.createStatement();
-            String sqlStmt = "INSERT INTO clienteFilmes(clienteFilme" + index +")" +
+            String sqlStmt = "INSERT INTO clienteFilmes(clienteFilme)" +
                     " VALUES(" + filmName + ") WHERE clienteUser = '" + user + "';";
     } catch (Exception e) {
         e.printStackTrace();
         }
     }
-    public String checkFilm(int code, String user) throws Exception {
+    public static boolean checkFilm(int code, String user) throws Exception {
+        // checkea si el filme ingresado se encuentra en catalogo
         SQLConnection conn = new SQLConnection();
         try {
+            // statements para datos de clientes
             Statement stmt = conn.myConnect.createStatement();
             String sqlStmt = "SELECT codigoFilme, nombreFilme FROM filmes"
                     + "WHERE codigoFilme = '" + code + "';";
             ResultSet rs = stmt.executeQuery(sqlStmt);
+            // statements para datos de peliculas
+            Statement stmt2 = conn.myConnect.createStatement();
             rs.next();
             String rsCodigoValue = rs.getString("codigoFilme");
             String rsNombreValue = rs.getString("nombreFilme");
             if (rsCodigoValue.equals(code)) {
-                setFilm(1, rsNombreValue, "user");
-                return "Se ha introducido un filme alquilado a su cuenta.";
+                setFilm(rsNombreValue, user);
+                return true;
             } else {
-                return "shit dont work yo";
+                return false;
             }
         } catch (Exception e) {
-            return "Ese filme no existe. Por Favor revise el catalogo de filmes.";
+            return false;
             }
     }
     
 public class Client {
+    // clase de usuario
+    // refleja el modelo en la base de datos
     private String userName;
     private String email;
     private String fullName;
@@ -195,5 +220,14 @@ public class Client {
     public String getFilm(int index) {
         return films[index];
     }
-}
+    public String toString() {
+        return "<div id='clientInfo'><ul><li>Nombre De Usuario: <b>" + this.userName + 
+                "</b></li><li>Email: <b>" + 
+                this.email + "</b></li><li>Nombre De Cliente: <b>" + 
+                this.fullName + "</b></li></ul></div><hr />";
+        }
+    public void addFilm(int code) throws Exception {
+        Controlador.SQLConnection.checkFilm(code, this.getUsername());
+        }
+    }
 }

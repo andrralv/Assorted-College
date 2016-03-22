@@ -67,7 +67,8 @@ a:hover {color:white;}
                border-style: solid;
                border-color: black;
                overflow-y: scroll;
-               text-align: left;}
+               text-align: left;
+               display: inline;}
 
 hr {color: white;}
 
@@ -95,4 +96,6 @@ hr {color: white;}
 #formWrapper {position:fixed;
         left: 320px;
         bottom: 120px;}
+
+#clientInfo {display: inline;}
 

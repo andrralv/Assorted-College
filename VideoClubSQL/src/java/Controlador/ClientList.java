@@ -2,19 +2,12 @@ package Controlador;
 import java.util.ArrayList;
 
 public class ClientList {
-    private myList lista;
-    public ClientList() {
-        this.lista = new myList();
-    }  
-    public myList getLista() {
+    // crea un arraylist con objetos cliente
+    public ArrayList<Controlador.SQLConnection.Client> lista;
+    ClientList() {
+        this.lista = new ArrayList<>();
+    }
+    ArrayList getLista(){
         return this.lista;
     }
 }
-
-class myList {
-    public ArrayList<Controlador.SQLConnection.Client> lista;
-    myList() {
-        this.lista = new ArrayList<>();
-    }
-}
-

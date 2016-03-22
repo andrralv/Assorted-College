@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -29,9 +30,12 @@
                 <div id="tableWrapper">
                     <p id="titulo"><b>Listado de Clientes</b></p>
                     <hr />
-                    
+                    <!-- Codigo Java de Datos de los Clientes -->
                     <%  Controlador.SQLConnection newConnection = new Controlador.SQLConnection();
-                        newConnection.clientData();
+                        ArrayList myList = newConnection.clientData();
+                        for (int i = 0; i < myList.size(); i++) {
+                            out.println(myList.get(i));
+                        }
                     %>
                 </div>
             </section>
