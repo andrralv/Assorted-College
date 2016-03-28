@@ -22,7 +22,7 @@
             <ul>
                 <li><a href="ingreso.jsp" id="index"><h5>[Volver Al Inicio]</h5></a></li>
                 <li><a href="catalogo.jsp" id="catalogo"><h5>[Catalogo]</h5></a></li>
-                <li><a href="https://github.com/andrralv" id="catalogo"><h5>[Acerca de Nosotros]</h5></a></li>
+                <li><a href="https://github.com/andrralv" id="catalogo" target="_blank"><h5>[Acerca de Nosotros]</h5></a></li>
                 <li><a href="logout.jsp" id="logout"><h5>[Logout]</h5></a></li>
             </ul>  
 	</nav>
@@ -34,8 +34,34 @@
                     <%  Controlador.SQLConnection newConnection = new Controlador.SQLConnection();
                         ArrayList myList = newConnection.clientData();
                         for (int i = 0; i < myList.size(); i++) {
-                            out.println(myList.get(i));
-                        }
+                            Controlador.SQLConnection.Client thisClient = (Controlador.SQLConnection.Client)myList.get(i);
+                            out.println(thisClient);
+                            out.println("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Filmes Alquilados: </i></b>");
+                            out.println("<hr /><ul>");
+                            String clientUser = thisClient.getUsername();
+                            for (int j = 0; j < 5; j++) {
+                                int myCount2 = 0;
+                                String film = thisClient.getFilm(j);
+                                String filmFormat = String.format("<li class='thisMovie" + myCount2 + "'>%s&nbsp;&nbsp;"
+                                        + "<form action=\"removeFilm.jsp\">"
+                                        + "<button type=\"submit\" name=\"remover\">Remover Filme</button>"
+                                        + "<input type='hidden' name='film' value ='%s'></form>"
+                                        + "<input type='hidden' name='user' value='%s'>"
+                                        + "</li>", film, film, clientUser);
+                                if (film == null) {
+                                    out.println("null");
+                                } else {
+                                    out.println(filmFormat);
+                                }
+                                myCount2++;
+                            }
+                        out.println("</ul><form action=\"addFilm.jsp\" novalidate>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                                + "<input type='text' name='code' placeholder='codigo de 4 digitos'>"
+                                + "<button id='thisButton' type=\"submit\" name=\"agregar\">Agregar un Filme Nuevo"
+                                + "</button>&nbsp;&nbsp;<div id='mCounter'></div>"
+                                + "<input type='hidden' name='myUser' value='" + clientUser + "'></form><br />"
+                                + "<hr />"); 
+                            }
                     %>
                 </div>
             </section>
@@ -49,6 +75,11 @@
         <div id="bottomMessage"><h5>Buscar Cliente: Ctrl + F > Introducir nombre de usuario</h5></div>
         <footer>
             <h5>Andre Rodriguez. UNED 2016. [andralv77@gmail.com]</h5>
+            <script src="JS/jquery-v1.12.0.js"></script>
+            <script>
+                // javascript code to disable button goes here
+                // remember to add dates to the movies
+            </script>
         </footer>
     </body>
 </html>

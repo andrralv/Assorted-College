@@ -12,14 +12,12 @@
 <%@ page import="javax.xml.transform.TransformerFactory"%>
 
 <% 
-String codeString = request.getParameter("code");
-int code = Integer.parseInt(codeString);
-String thisUser = request.getParameter("myUser");
-
-if (Controlador.SQLConnection.checkRepeats(code, thisUser) == true) {
-            Controlador.SQLConnection.checkFilm(code, thisUser);
-            response.sendRedirect("acceso.jsp");
-        } else {
-    out.println("Film was not in catalog or is already rented by the user. <a href='acceso.jsp'>Volver al Sistema</a>");
+String movieString = request.getParameter("film");
+String thisUser = request.getParameter("user");
+if (Controlador.SQLConnection.removeMovie(movieString, thisUser) == true) {
+    response.sendRedirect("acceso.jsp");
+} else {
+    out.println("No se pudo remover la pelicula por un error interno. <a href=\"acceso.jsp\">Volver al Sistema</a>");
 }
 %>
+

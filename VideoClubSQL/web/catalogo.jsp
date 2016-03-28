@@ -1,6 +1,6 @@
 <!DOCTYPE html>
  <%@page contentType="text/html" pageEncoding="UTF-8" language="java" 
-         import="java.util.*, java.lang.*, Controlador.modeloVideoClub.*"%>
+         import="java.util.*, java.lang.*"%>
 <html>
     <head>
         <title>VideoClub Ficticio</title>
@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Sitio web ficticio para la administracion de un videoclub">
         <link rel="icon" type="image/png" href="images/icono.png" sizes="16x16">
-        <link rel="stylesheet" type="text/css" href="CSS/styleGen5.css">
+        <link rel="stylesheet" type="text/css" href="CSS/styleCatalogo.css">
         <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
     </head>
     <body>
@@ -28,7 +28,7 @@
         <section>
             <table id="myTable">
                 <tr><th>Codigo</th><th>Nombre de Filme</th></tr>
-                <tr><td>4445</td><td>Neon Genesis Evangelion</td></tr>
+                <tr><td>1001</td><td>Neon Genesis Evangelion</td></tr>
                 <tr><td>1232</td><td>Pulp Fiction</td></tr>
                 <tr><td>4323</td><td>V for Vendetta</td></tr>
                 <tr><td>4832</td><td>Unglorious Bastards</td></tr>
@@ -47,9 +47,11 @@
                 <tr><td>6664</td><td>Eternal Sunshine of the Spotless Light</td></tr>
             </table>
         </section>
+            <a href="acceso.jsp" id="return">[Volver Al Sistema]</a>
         </div>
         <footer>
             <h5>Andre Rodriguez. UNED 2016. [andralv77@gmail.com]</h5>
+            <a href="acceso.jsp" id="return">Volver al Sistema</a>
         </footer>
     </body>
 </html>

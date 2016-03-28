@@ -6,27 +6,28 @@ html{font-family:'Roboto', sans-serif;
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bf3131', endColorstr='#f4fffb',GradientType=0 ); /* IE6-9 */
 	margin: 0 0  auto;
 	padding: 0 0 auto;
-	overflow-x: hidden;
-        overflow-y: hidden;}
+	overflow-x: hidden;}
 
 #imagenHeader{background-image: url("../images/banner.png");
             background-repeat: no-repeat;
             padding: 30px;
             margin: 20px}
 
-section {padding-right:260px;
-        padding-left: 300px;
-        padding-top: 100px;
-        text-align: center;}
+section {padding-right:100px;
+        padding-left: 250px;
+        padding-top: 70px;
+        padding-bottom: 30px;
+        text-align: left;}
 
 header {padding-left:20%}
 
 header h3{padding-left: 12%;}
 
-table {border-style: solid;
-    border: 1px;}
+section table {border-style: solid;
+                border: 2px;
+                border-color: black;}
 
-footer h5 {padding-left: 620px;
+footer h5 {padding-left: 580px;
         padding-top: 20px;}
 
 #wrapper {max-width: 800px;
@@ -36,7 +37,7 @@ footer h5 {padding-left: 620px;
 nav ul{list-style-type: none;
        margin: 0;
        padding: 0;
-       padding-left: 50px;
+       padding-left: 25px;
     }
     
 nav li {float: left;
@@ -49,7 +50,7 @@ nav {padding-left:24%;
     
 footer {background-color: black;
         color: white;
-        padding-bottom: 50px;
+        padding-bottom: 30px;
         margin-top: 50px;
         margin: -10px;}
 
@@ -67,8 +68,7 @@ a:hover {color:white;}
                border-style: solid;
                border-color: black;
                overflow-y: scroll;
-               text-align: left;
-               display: inline;}
+               text-align: left;}
 
 hr {color: white;}
 
@@ -97,4 +97,6 @@ hr {color: white;}
         left: 320px;
         bottom: 120px;}
 
-#clientInfo {display: inline;}
+#return {padding-left: 350px;
+        padding-bottom: 15px;
+        text-decoration: underline;}

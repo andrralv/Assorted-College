@@ -8,6 +8,6 @@
 <%@ page import="java.lang.*" %>
 
 <%
-    String printThis = Controlador.SQLConnection.clientData();
-    out.println(printThis);
+String codeString = request.getParameter("name");
+String userName = request.getParameter("name");
 %>

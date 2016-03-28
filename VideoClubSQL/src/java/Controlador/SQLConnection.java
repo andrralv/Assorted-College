@@ -22,99 +22,150 @@ public class SQLConnection {
                        "jdbc:mysql://ec2-52-35-132-70.us-west-2.compute.amazonaws.com:3306/videoclub",
                        "root",
                        "rugalpopo");
+        } else {
+            myConnect.close();
         }
         return myConnect;
     }  
+    
     public boolean checkUser(String requestSt) throws SQLException, ClassNotFoundException {
         // revisa si un usuario ya existe en el registro
         // si retorna true no permite al usuario registrar
         boolean bool = false;
         SQLConnection conn = new SQLConnection();
+        Statement stmt = null;
         try {
         String sqlStmt = "SELECT username FROM adminRegistro"
                 + " WHERE username = '" + requestSt + "'";
-        Statement stmt = conn.myConnect.createStatement();
+        stmt = conn.myConnect.createStatement();
         ResultSet rs = stmt.executeQuery(sqlStmt);
         rs.next();
         String rsValue = rs.getString("username");
-        rs.close();
         if (rsValue.equals(requestSt)){
             bool = false; 
             }
         } catch (SQLException e){
             bool = true;
-            }
+            } finally {
+            stmt.close();
+            conn.myConnect.close();
+        }
         return bool;
         }
+    
     public boolean newUser (String username, String password, String fullName, String email) throws Exception{
         // ingresa un nuevo usuario en la base de datos
         SQLConnection conn = new SQLConnection();
+        Statement stmt = null;
         try {
-            Statement stmt = conn.myConnect.createStatement();
+            stmt = conn.myConnect.createStatement();
             String sqlStmt = "INSERT INTO adminRegistro(username, password, fullName, email)"
                     + " VALUES('" + username + "', '" + password + "', '" + fullName + "', '" + email + "');";
             stmt.executeUpdate(sqlStmt);
+            stmt.close();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
+        finally {
+            stmt.close();
+            conn.myConnect.close();
+        }
     }
+    
     public boolean login (String username, String password) throws Exception {
         // checkea si los credenciales ingresados
         // existen en la base de datos
         boolean bool = false;
         SQLConnection conn = new SQLConnection();
+        Statement stmt = null;
         try {
             String sqlStmt = "SELECT username FROM adminRegistro"
                     + " WHERE username = '" + username + "';";
-            Statement stmt = conn.myConnect.createStatement();
+            stmt = conn.myConnect.createStatement();
             ResultSet rs = stmt.executeQuery(sqlStmt);
             rs.next();
             String rsValue = rs.getString("username");
             rs.close();
+            stmt.close();
             if (rsValue.equals(username)) {
                 bool = true;
             }
         } catch (Exception e) {
             bool = false;
-            } 
+            } finally {
+            stmt.close();
+            conn.myConnect.close();
+        }
         return bool;
     }
+    
     public boolean checkNewClient (String user) throws Exception {
         // checkea si un nuevo cliente ya existe en la base de datos
         // si retorna true no permite al usuario registrar el nuevo usuario
         boolean bool = false;
         SQLConnection conn = new SQLConnection();
+        Statement stmt = null;
         try {
             String sqlStmt = "SELECT clienteUser FROM clientes"
                     + " WHERE clienteUser = '" + user + "';";
-            Statement stmt = conn.myConnect.createStatement();
+            stmt = conn.myConnect.createStatement();
             ResultSet rs = stmt.executeQuery(sqlStmt);
             rs.next();
             String rsValue = rs.getString("clienteUser");
             rs.close();
+            stmt.close();
             if (rsValue.equals(user)) {
                 bool = true;
                 }
             }
         catch (Exception e) {
             bool = false;
-            }
+            } finally {
+            stmt.close();
+            conn.myConnect.close();
+        }
         return bool;
     }
+    
     public boolean newClient (String user, String email, String name) throws Exception {
         // ingresa un nuevo cliente en la base de datos
         boolean bool;
         SQLConnection conn = new SQLConnection();
+        Statement stmt = null;
         try {
-            Statement stmt = conn.myConnect.createStatement();
+            stmt = conn.myConnect.createStatement();
             String sqlStmt = "INSERT INTO clientes(clienteUser, clienteEmail, clienteNombre)"
                     + " VALUES('" + user + "', '" + email + "', '" + name + "');";
             stmt.executeUpdate(sqlStmt);
+            stmt.close();
             bool = true;
         } catch (Exception e) {
             bool = false;
+        } finally {
+            stmt.close();
+            conn.myConnect.close();
+        }
+    return bool;
+    }
+    
+    public static boolean removeMovie (String movie, String user) throws Exception {
+        // ingresa un nuevo cliente en la base de datos
+        boolean bool;
+        SQLConnection conn = new SQLConnection();
+        PreparedStatement pstmt = null;
+        try {
+            String sqlStmt = "DELETE FROM clienteFilmes"
+                    + " WHERE nombreFilme = '" + movie + "';";
+            pstmt = conn.myConnect.prepareStatement(sqlStmt);
+            pstmt.execute(sqlStmt);
+            bool = true;
+        } catch (Exception e) {
+            bool = false;
+        } finally {
+            pstmt.close();
+            conn.myConnect.close();
         }
     return bool;
     }
@@ -125,61 +176,160 @@ public class SQLConnection {
         // desplegar la informacion de salida
         Client cliente = null;
         ArrayList cList = new Controlador.ClientList().lista;
-        boolean bool = false;
         SQLConnection conn = new SQLConnection();
+        PreparedStatement pstmt = null;
         try {
-            Statement stmt = conn.myConnect.createStatement();
             String sqlStmt = "SELECT * FROM clientes;";
-            ResultSet rs = stmt.executeQuery(sqlStmt);
+            pstmt = conn.myConnect.prepareStatement(sqlStmt);
+            ResultSet rs = pstmt.executeQuery(sqlStmt);
             rs.beforeFirst();
             while (rs.next()) {
                 String rsUserValue = rs.getString("clienteUser");
                 String rsEmailValue = rs.getString("clienteEmail");
                 String rsNameValue = rs.getString("clienteNombre");
-                cliente = new Client(rsUserValue, rsEmailValue, rsNameValue);
+                int rsSaldo = rs.getInt("clienteSaldo");
+                int[] codesLista = retrieveCodes(rsUserValue);
+                String[] filmesLista = retrieveMovies(rsUserValue);
+                cliente = new Client(rsUserValue, rsEmailValue, rsNameValue, rsSaldo);
+                for (int i = 0; i < filmesLista.length; i++) {
+                    cliente.addFilm(filmesLista[i], codesLista[i], i, rsUserValue);
+                }
                 cList.add(cliente);
             }
-            rs.close(); 
+             
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            pstmt.close();
+            conn.myConnect.close();
         }
     return cList;
     }  
     
-    public static void setFilm(String filmName, String user) throws Exception {
+    public int[] retrieveCodes(String user) throws Exception {
+        // devuelve la lista de peliculas alquiladas de un usuario especifico
+        SQLConnection conn = new SQLConnection();
+        int i = 0;
+        int[] codes = new int[5];
+        PreparedStatement pstmt = null;
+        try {
+            String sqlStmt = "SELECT codigoFilme FROM clienteFilmes"
+                    + " WHERE clienteUser = '" + user + "';";
+            pstmt = conn.myConnect.prepareStatement(sqlStmt);
+            ResultSet rs = pstmt.executeQuery(sqlStmt);
+            while (rs.next()) {
+                int code = rs.getInt("codigoFilme");
+                codes[i++] = code;
+            }
+        }
+        catch (Exception e) {
+          e.printStackTrace();  
+        } finally {
+            pstmt.close();
+            conn.myConnect.close();
+        }
+    return codes;
+    }
+    
+    public String[] retrieveMovies(String user) throws Exception {
+        // devuelve la lista de peliculas alquiladas de un usuario especifico
+        SQLConnection conn = new SQLConnection();
+        int i = 0;
+        PreparedStatement pstmt = null;
+        String[] names = new String[5];
+        try {
+            String sqlStmt = "SELECT nombreFilme FROM clienteFilmes"
+                    + " WHERE clienteUser = '" + user + "';";
+            pstmt = conn.myConnect.prepareStatement(sqlStmt);
+            ResultSet rs = pstmt.executeQuery(sqlStmt);
+            while (rs.next()) {
+                String name = rs.getString("nombreFilme");
+                names[i++] = name;
+            }
+        }
+        catch (Exception e) {
+          e.printStackTrace();  
+        } finally {
+            pstmt.close();
+            conn.myConnect.close();
+        }
+    return names;
+    }
+    
+    public static boolean setFilm(String filmName, int code, String user) throws Exception {
         // agrega un nuevo filme a un cliente
+        boolean bot = true;
+        PreparedStatement pstmt = null;
         SQLConnection conn = new SQLConnection();
         try {
-            Statement stmt = conn.myConnect.createStatement();
-            String sqlStmt = "INSERT INTO clienteFilmes(clienteFilme)" +
-                    " VALUES(" + filmName + ") WHERE clienteUser = '" + user + "';";
+            String sqlStmt = "INSERT INTO clienteFilmes(nombreFilme, codigoFilme, clienteUser)" +
+                    " VALUES('" + filmName + "', " + code + ", '" + user +"');";
+            pstmt = conn.myConnect.prepareStatement(sqlStmt);
+            pstmt.executeUpdate(sqlStmt);
+            bot = true;
     } catch (Exception e) {
-        e.printStackTrace();
+        return false;
+    } finally {
+        pstmt.close();
+        conn.myConnect.close();
         }
+    return bot;
     }
+    
     public static boolean checkFilm(int code, String user) throws Exception {
         // checkea si el filme ingresado se encuentra en catalogo
         SQLConnection conn = new SQLConnection();
+        boolean bot = false;
+        Statement stmt = null;
         try {
             // statements para datos de clientes
-            Statement stmt = conn.myConnect.createStatement();
+            stmt = conn.myConnect.createStatement();
             String sqlStmt = "SELECT codigoFilme, nombreFilme FROM filmes"
-                    + "WHERE codigoFilme = '" + code + "';";
+                    + " WHERE codigoFilme = " + code + ";";
             ResultSet rs = stmt.executeQuery(sqlStmt);
             // statements para datos de peliculas
-            Statement stmt2 = conn.myConnect.createStatement();
-            rs.next();
-            String rsCodigoValue = rs.getString("codigoFilme");
-            String rsNombreValue = rs.getString("nombreFilme");
-            if (rsCodigoValue.equals(code)) {
-                setFilm(rsNombreValue, user);
-                return true;
-            } else {
-                return false;
-            }
-        } catch (Exception e) {
+            if (rs.next()) {
+                String myFilm = rs.getString("nombreFilme");
+                setFilm(myFilm, code, user);
+                bot = true;
+                rs.close();
+            } 
+        }
+        catch (Exception e) {
             return false;
-            }
+            } finally {
+            conn.myConnect.close();
+            }        
+        return bot;
+        } 
+    
+    public static boolean checkRepeats(int code, String user) throws Exception {
+        // checkea si el usuario ya tiene este filme alquilado
+        Integer myCode = code;
+        SQLConnection conn = new SQLConnection();
+        Statement stmt = null;
+        try {
+        // statements de datos
+        stmt = conn.myConnect.createStatement();
+        String sqlStmt = "SELECT codigoFilme, clienteUser FROM clienteFilmes"
+                + " WHERE codigoFilme = " + code + " AND clienteUser = '" + user + "';"; 
+        ResultSet rs = stmt.executeQuery(sqlStmt);
+        if(rs.next()) {
+            rs.close();
+            return false;
+            } 
+        else {
+            rs.close();
+            return true;
+             } 
+        }
+        catch (Exception e) {
+            return false;
+        }
+        finally {
+            stmt.close();
+            conn.myConnect.close();
+        }
     }
     
 public class Client {
@@ -188,12 +338,14 @@ public class Client {
     private String userName;
     private String email;
     private String fullName;
-    private String[] films = new String[4]; 
+    private String[] films = new String[5]; 
+    private int saldo;
     
-    public Client(String name, String email, String fullName) {
+    public Client(String name, String email, String fullName, int saldo) {
         this.userName = name;
         this.email = email;
         this.fullName = fullName;
+        this.saldo = saldo;
     }
     
     public void setUsername(String userName) {
@@ -214,8 +366,14 @@ public class Client {
     public String getEmail() {
         return this.email;
     }
-    public void addFilm(String filmName, int index) {
-        this.films[index] = filmName;
+    public void addFilm(String filmName, int filmCode, int index, String user) throws Exception {
+        // adds to the object movies in database
+        if (Controlador.SQLConnection.checkFilm(filmCode, user) == true) { 
+            this.films[index] = filmName;
+        }
+        else {
+            this.films[index] = "error";
+        }
     }
     public String getFilm(int index) {
         return films[index];
@@ -224,10 +382,9 @@ public class Client {
         return "<div id='clientInfo'><ul><li>Nombre De Usuario: <b>" + this.userName + 
                 "</b></li><li>Email: <b>" + 
                 this.email + "</b></li><li>Nombre De Cliente: <b>" + 
-                this.fullName + "</b></li></ul></div><hr />";
-        }
-    public void addFilm(int code) throws Exception {
-        Controlador.SQLConnection.checkFilm(code, this.getUsername());
+                this.fullName + "</b></li>"
+                + "<li>Saldo por cancelar: <b>" + this.saldo + 
+                "</b></li></ul></div>";
         }
     }
 }
