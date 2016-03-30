@@ -20,6 +20,6 @@ if (Controlador.SQLConnection.checkRepeats(code, thisUser) == true) {
             Controlador.SQLConnection.checkFilm(code, thisUser);
             response.sendRedirect("acceso.jsp");
         } else {
-    out.println("Film was not in catalog or is already rented by the user. <a href='acceso.jsp'>Volver al Sistema</a>");
+    out.println("El filme no esta en catalogo o ya ha sido alquilado por otro usuario. <a href='acceso.jsp'>Volver al Sistema</a>");
 }
 %>

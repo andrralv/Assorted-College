@@ -78,37 +78,33 @@ public final class acceso_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    ");
   Controlador.SQLConnection newConnection = new Controlador.SQLConnection();
                         ArrayList myList = newConnection.clientData();
-                        int myCount = 0;
                         for (int i = 0; i < myList.size(); i++) {
                             Controlador.SQLConnection.Client thisClient = (Controlador.SQLConnection.Client)myList.get(i);
                             out.println(thisClient);
                             out.println("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Filmes Alquilados: </i></b>");
                             out.println("<hr /><ul>");
-                            out.println("<span id='this'+myCount></span>");
-                            myCount++;
+                            out.println("<span class='thisCount'>"); // principio de span
                             String clientUser = thisClient.getUsername();
                             for (int j = 0; j < 5; j++) {
-                                int myCount2 = 0;
                                 String film = thisClient.getFilm(j);
-                                String filmFormat = String.format("<li class='thisMovie" + myCount2 + "'>%s&nbsp;&nbsp;"
+                                String filmFormat = String.format("<li class='thisMovie'>%s&nbsp;&nbsp;" // principio de li thisMovie
                                         + "<form action=\"removeFilm.jsp\">"
                                         + "<button type=\"submit\" name=\"remover\">Remover Filme</button>"
                                         + "<input type='hidden' name='film' value ='%s'></form>"
                                         + "<input type='hidden' name='user' value='%s'>"
-                                        + "</li>", film, film, clientUser);
+                                        + "</li>", film, film, clientUser); // final de li thisMovie
                                 if (film == null) {
                                     out.println("&nbsp;&nbsp;");
                                 } else {
                                     out.println(filmFormat);
                                 }
-                                myCount2++;
                             }
-                        out.println("</ul><form action=\"addFilm.jsp\" novalidate>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                        out.println("<form action=\"addFilm.jsp\" novalidate>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
                                 + "<input type='text' name='code' placeholder='codigo de 4 digitos'>"
-                                + "<button id='thisButton' type=\"submit\" name=\"agregar\">Agregar un Filme Nuevo"
-                                + "</button>&nbsp;&nbsp;<div id='mCounter'></div>"
+                                + "<button class='thisButton' type=\"submit\" name=\"agregar\">Agregar un Filme Nuevo"
+                                + "</button><span id='noMas'></span>"
                                 + "<input type='hidden' name='myUser' value='" + clientUser + "'></form><br />"
-                                + "<hr />"); 
+                                + "<hr /></span></ul>"); //fin de span
                             }
                     
       out.write("\n");
@@ -127,6 +123,20 @@ public final class acceso_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <footer>\n");
       out.write("            <h5>Andre Rodriguez. UNED 2016. [andralv77@gmail.com]</h5>\n");
       out.write("        </footer>\n");
+      out.write("        <script src=\"JS/jquery-v1.12.0.js\"></script>\n");
+      out.write("        <script>\n");
+      out.write("            console.log(\"hello there\");\n");
+      out.write("            $('.thisCount').each(function()\n");
+      out.write("                {\n");
+      out.write("                    var count = $(this).find('.thisMovie').length;\n");
+      out.write("                    if(count > 4)\n");
+      out.write("                    {\n");
+      out.write("                        console.log(\"working up to this point\");\n");
+      out.write("                        $(this).find('.thisButton').first().prop('disabled', true);\n");
+      out.write("                        $('#noMas').text(\" Ya no puede alquilar más filmes.\");\n");
+      out.write("                    }\n");
+      out.write("            });\n");
+      out.write("        </script>\n");
       out.write("    </body>\n");
       out.write("</html>\n");
     } catch (Throwable t) {
