@@ -23,7 +23,7 @@ public class SQLConnection {
                        "root",
                        "rugalpopo");
         } else {
-            myConnect.close();
+            // ignore
         }
         return myConnect;
     }  
@@ -131,7 +131,7 @@ public class SQLConnection {
     
     public boolean newClient (String user, String email, String name) throws Exception {
         // ingresa un nuevo cliente en la base de datos
-        boolean bool;
+        boolean bot;
         SQLConnection conn = new SQLConnection();
         Statement stmt = null;
         try {
@@ -140,14 +140,62 @@ public class SQLConnection {
                     + " VALUES('" + user + "', '" + email + "', '" + name + "');";
             stmt.executeUpdate(sqlStmt);
             stmt.close();
-            bool = true;
+            bot = true;
         } catch (Exception e) {
-            bool = false;
+            bot = false;
         } finally {
             stmt.close();
             conn.myConnect.close();
         }
-    return bool;
+    return bot;
+    }
+    
+    public boolean removeClient (String user) throws Exception {
+        // remueve un cliente de la base de datos
+        boolean bot = false;
+        SQLConnection conn = new SQLConnection();
+        PreparedStatement pstmt = null;
+        PreparedStatement pstmt2 = null;
+        try {
+            String sqlStmt = "DELETE FROM clientes "
+                    + "WHERE clientes.clienteUser = '" + user + "';";
+            pstmt = conn.myConnect.prepareStatement(sqlStmt);
+            pstmt.executeUpdate(sqlStmt);
+            pstmt.close();
+            String sqlStmt2 = "DELETE FROM clienteFilmes"
+                    + " WHERE clienteFilmes.clienteUser = '" + user + "';";
+            pstmt2 = conn.myConnect.prepareStatement(sqlStmt2);
+            pstmt2.executeUpdate(sqlStmt2);
+            pstmt2.close();
+            bot = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            bot = false;
+        } finally {
+            conn.myConnect.close();
+        }
+    return bot;
+    }
+    
+    public static boolean setFilm(String filmName, int code, String user) throws Exception {
+        // agrega un nuevo filme a un cliente
+        boolean bot = true;
+        PreparedStatement pstmt = null;
+        SQLConnection conn = new SQLConnection();
+        try {
+            String sqlStmt = "INSERT INTO clienteFilmes(nombreFilme, codigoFilme, clienteUser)" +
+                    " VALUES('" + filmName + "', " + code + ", '" + user +"');";
+            pstmt = conn.myConnect.prepareStatement(sqlStmt);
+            pstmt.executeUpdate(sqlStmt);
+            pstmt.close();
+            changeSaldo(user, true);
+            bot = true;
+    } catch (Exception e) {
+        return false;
+    } finally {
+        conn.myConnect.close();
+        }
+    return bot;
     }
     
     public static boolean removeMovie (String movie, String user) throws Exception {
@@ -160,6 +208,7 @@ public class SQLConnection {
                     + " WHERE nombreFilme = '" + movie + "';";
             pstmt = conn.myConnect.prepareStatement(sqlStmt);
             pstmt.execute(sqlStmt);
+            changeSaldo(user, false);
             bool = true;
         } catch (Exception e) {
             bool = false;
@@ -168,6 +217,43 @@ public class SQLConnection {
             conn.myConnect.close();
         }
     return bool;
+    }
+    
+    public static boolean changeSaldo(String user, boolean bool) throws Exception {
+        // cambia el saldo del cliente 
+        // false para remover filme
+        // true para agregar filme
+        SQLConnection conn = new SQLConnection();
+        Statement pstmt = null;
+        Statement pstmt2 = null;
+        boolean bot = false;
+        int newSaldo = 0;
+        try {
+            String sqlStmt = "SELECT clienteSaldo FROM clientes WHERE clienteUser = '" + user + "';";
+            pstmt = conn.myConnect.prepareStatement(sqlStmt);
+            ResultSet rs = pstmt.executeQuery(sqlStmt);
+            rs.next();
+            int mySaldo = rs.getInt("clienteSaldo");
+            if (bool = true) {
+                newSaldo = mySaldo + 1000;   
+            } else {
+                newSaldo = mySaldo - 1000;
+            }
+            String stSaldo = Integer.toString(newSaldo);
+            rs.close();
+            pstmt.close();
+            String sqlStmt2 = "UPDATE clientes SET clienteSaldo = " + stSaldo + " WHERE clienteUser = '" + user + "';";
+            pstmt2 = conn.myConnect.prepareStatement(sqlStmt2);
+            pstmt2.executeUpdate(sqlStmt2);
+            pstmt2.close();
+            bot = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            bot = false;
+        } finally {
+            conn.myConnect.close();
+        }
+    return bot;
     }
     
     public ArrayList clientData() throws Exception {
@@ -195,8 +281,7 @@ public class SQLConnection {
                     cliente.addFilm(filmesLista[i], codesLista[i], i, rsUserValue);
                 }
                 cList.add(cliente);
-            }
-             
+            }    
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -254,26 +339,6 @@ public class SQLConnection {
             conn.myConnect.close();
         }
     return names;
-    }
-    
-    public static boolean setFilm(String filmName, int code, String user) throws Exception {
-        // agrega un nuevo filme a un cliente
-        boolean bot = true;
-        PreparedStatement pstmt = null;
-        SQLConnection conn = new SQLConnection();
-        try {
-            String sqlStmt = "INSERT INTO clienteFilmes(nombreFilme, codigoFilme, clienteUser)" +
-                    " VALUES('" + filmName + "', " + code + ", '" + user +"');";
-            pstmt = conn.myConnect.prepareStatement(sqlStmt);
-            pstmt.executeUpdate(sqlStmt);
-            bot = true;
-    } catch (Exception e) {
-        return false;
-    } finally {
-        pstmt.close();
-        conn.myConnect.close();
-        }
-    return bot;
     }
     
     public static boolean checkFilm(int code, String user) throws Exception {
@@ -370,9 +435,6 @@ public class Client {
         // adds to the object movies in database
         if (Controlador.SQLConnection.checkFilm(filmCode, user) == true) { 
             this.films[index] = filmName;
-        }
-        else {
-            this.films[index] = "error";
         }
     }
     public String getFilm(int index) {

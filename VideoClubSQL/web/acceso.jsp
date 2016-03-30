@@ -33,11 +33,14 @@
                     <!-- Codigo Java de Datos de los Clientes -->
                     <%  Controlador.SQLConnection newConnection = new Controlador.SQLConnection();
                         ArrayList myList = newConnection.clientData();
+                        int myCount = 0;
                         for (int i = 0; i < myList.size(); i++) {
                             Controlador.SQLConnection.Client thisClient = (Controlador.SQLConnection.Client)myList.get(i);
                             out.println(thisClient);
                             out.println("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Filmes Alquilados: </i></b>");
                             out.println("<hr /><ul>");
+                            out.println("<span id='this'+myCount></span>");
+                            myCount++;
                             String clientUser = thisClient.getUsername();
                             for (int j = 0; j < 5; j++) {
                                 int myCount2 = 0;
@@ -49,7 +52,7 @@
                                         + "<input type='hidden' name='user' value='%s'>"
                                         + "</li>", film, film, clientUser);
                                 if (film == null) {
-                                    out.println("null");
+                                    out.println("&nbsp;&nbsp;");
                                 } else {
                                     out.println(filmFormat);
                                 }
@@ -67,19 +70,16 @@
             </section>
         </div>
         <div id="formWrapper">
-            <form action="clienteNuevo.jsp"><label>Agregar Cliente Nuevo: </label><input type="text" name="user" 
+            <form action="clienteNuevo.jsp" id="form1"><label>Agregar Cliente Nuevo: </label><input type="text" name="user" 
                             placeholder="Nombre de usuario" required> <input type="text" name="fullname" 
                             placeholder="Nombre completo" required> <input type="email" name="email" 
                             placeholder="Email" required> <button type="submit">Agregar</button></form>
+            <form action="removerCliente.jsp" id="form2"><label>Remover Cliente: </label><input type="text" name="cliente"
+                            placeholder="Introduzca usuario"><button type="submit">Remover</button></form>                                                                             
         </div>
         <div id="bottomMessage"><h5>Buscar Cliente: Ctrl + F > Introducir nombre de usuario</h5></div>
         <footer>
             <h5>Andre Rodriguez. UNED 2016. [andralv77@gmail.com]</h5>
-            <script src="JS/jquery-v1.12.0.js"></script>
-            <script>
-                // javascript code to disable button goes here
-                // remember to add dates to the movies
-            </script>
         </footer>
     </body>
 </html>

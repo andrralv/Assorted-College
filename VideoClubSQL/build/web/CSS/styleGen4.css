@@ -94,7 +94,14 @@ hr {color: white;}
                 margin-top: 50px;}
 
 #formWrapper {position:fixed;
-        left: 320px;
-        bottom: 120px;}
+        display:inline-block;
+        float:left;
+        left: 200px;
+        bottom: 120px;
+        margin-top: 10px;
+        padding-top: 10px;}
+
+#formWrapper #form1 {display:inline;}
+#formWrapper #form2 {display:inline;}
 
 #clientInfo {display: inline;}
