@@ -1,0 +1,3 @@
+domain.SQLConnection
+domain.clientToDisplay
+domain.logicaUsuario
