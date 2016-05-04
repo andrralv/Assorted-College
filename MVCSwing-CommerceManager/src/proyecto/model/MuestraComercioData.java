@@ -1,8 +1,5 @@
 package proyecto.model;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -15,6 +12,7 @@ import org.w3c.dom.NodeList;
  */
 
 public class MuestraComercioData extends ManageDocument {
+    proyecto.Utilidades.getDate getFecha;
     public Comercio MuestraComercioData(int codigo) {
         Document doc = manageDocument("archivoComercio.xml");
         Comercio thisComercio = showData(doc, codigo);
@@ -48,22 +46,22 @@ public class MuestraComercioData extends ManageDocument {
             }
             // objeto de getfecha
             // parsing datos y devolviendo un objeto comercio
+            getFecha = new proyecto.Utilidades.getDate();
+            
             String codigoComercio = nodes.item(0).getTextContent();
             int codigoComercioInt = Integer.valueOf(codigoComercio);
             String nombreComercio = nodes.item(1).getTextContent();
             String descripcionComercio = nodes.item(2).getTextContent();
             String fechaCreacionComercio = nodes.item(3).getTextContent();
-            Date fechaCreacionComercioDate = proyecto.Utilidades.Utilidades.getFecha(fechaCreacionComercio);
+            Date fechaCreacionComercioDate = getFecha.getFecha(fechaCreacionComercio, false);
             String fechaLicenciaComercio = nodes.item(4).getTextContent();
-            Date fechaLicenciaComercioDate = proyecto.Utilidades.Utilidades.getFecha(fechaLicenciaComercio);
+            Date fechaLicenciaComercioDate = getFecha.getFecha(fechaLicenciaComercio, false);
             String ubicacionComercio = nodes.item(5).getTextContent();
             String telefonoComercio = nodes.item(6).getTextContent();
-            int telefonoComercioInt = Integer.valueOf(telefonoComercio);
             String estadoComercio = nodes.item(7).getTextContent();
             char estadoComercioChar = estadoComercio.charAt(0);
             
-            thisComercio = new Comercio(codigoComercioInt, nombreComercio, descripcionComercio, fechaCreacionComercioDate, 
-    fechaLicenciaComercioDate, ubicacionComercio, telefonoComercioInt, estadoComercioChar);
+            thisComercio = new Comercio();
             
     } catch (Exception e) {
         e.printStackTrace();

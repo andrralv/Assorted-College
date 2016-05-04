@@ -8,17 +8,6 @@ import java.util.Date;
  */
 public class Comercio {
 
-    public Comercio(int codigo, String nombre, String descripcion, Date fecha, Date fechaLicencia, String ubicacion, int telefono, char estado) {
-        this.codigo = codigo;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.fecha = fecha;
-        this.fechaLicencia = fechaLicencia;
-        this.ubicacion = ubicacion;
-        this.telefono = telefono;
-        this.estado = estado;
-    }
-    
     private int codigo;
     private String nombre;
     private String descripcion;

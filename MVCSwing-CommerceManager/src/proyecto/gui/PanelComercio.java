@@ -1,15 +1,12 @@
 package proyecto.gui;
 
 import java.awt.Component;
-import java.awt.FlowLayout;
-import java.text.SimpleDateFormat;
 import java.util.Properties;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -32,13 +29,16 @@ public class PanelComercio extends JPanel {
     private JLabel labelFechaLicencia;
     private JLabel labelUbicacionComercio;
     public JTextField fieldUbicacionComercio;
-    private JComboBox boxListaComercios;
+    public JComboBox boxListaComercios;
     private PanelBotonesComercio botones;
-    private String[] estados = {"", "Activo", "Inactivo"};
+    public String[] estados = {"", "Activo", "Inactivo"};
     private JLabel labelEstados;
     public JComboBox estadosBox;
     private JLabel labelComercios;
+    public JDatePickerImpl datePicker;
+    public JDatePickerImpl datePickerLicencia;
     
+    @SuppressWarnings("unchecked")
     public PanelComercio() {
         // title label
         String comercios = "Comercios";
@@ -73,7 +73,7 @@ public class PanelComercio extends JPanel {
         fieldTelefonoComercio.setMaximumSize(fieldTelefonoComercio.getPreferredSize());
         add(fieldTelefonoComercio);
         // descripcion
-        String descripcionComercio = "Descripcion Comecio: ";
+        String descripcionComercio = "Descripcion Comercio: ";
         labelDescripcionComercio = new JLabel(descripcionComercio);
         labelDescripcionComercio.setAlignmentX(Component.RIGHT_ALIGNMENT);
         add(labelDescripcionComercio);
@@ -94,7 +94,7 @@ public class PanelComercio extends JPanel {
         p.put("text.year", "Year");
         JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
         // picker 
-        JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new proyecto.Utilidades.DateLabelFormatter());
+        datePicker = new JDatePickerImpl(datePanel, new proyecto.Utilidades.DateLabelFormatter());
         add(datePicker);
         //fecha licencia 
         String fechaLicencia = "Expiracion de Licencia: ";
@@ -102,7 +102,13 @@ public class PanelComercio extends JPanel {
         labelFechaLicencia.setAlignmentX(Component.RIGHT_ALIGNMENT); 
         add(labelFechaLicencia);
         // picker
-        JDatePickerImpl datePickerLicencia = new JDatePickerImpl(datePanel, new proyecto.Utilidades.DateLabelFormatter());
+        UtilDateModel model2 = new UtilDateModel();
+        Properties p2 = new Properties();
+        p2.put("text.today", "Date");
+        p2.put("text.month", "Month");
+        p2.put("text.year", "Year");
+        JDatePanelImpl datePanelLicencia = new JDatePanelImpl(model2, p2);
+        datePickerLicencia = new JDatePickerImpl(datePanelLicencia, new proyecto.Utilidades.DateLabelFormatter());
         add(datePickerLicencia);
         // ubicacion
         String ubicacionComercio = "Ubicacion: ";
@@ -118,25 +124,26 @@ public class PanelComercio extends JPanel {
         labelEstados.setAlignmentX(Component.RIGHT_ALIGNMENT);
         add(labelEstados);
         // lista de estados
-        estadosBox = new JComboBox(estados);
+        estadosBox = new JComboBox<>(estados);
         add(estadosBox);
         // lista de comercios
         labelComercios = new JLabel("Comercios: ");
         labelComercios.setAlignmentX(Component.RIGHT_ALIGNMENT);
         add(labelComercios);
         // lista dinamica de comercios
-        boxListaComercios = new JComboBox();
+        boxListaComercios = new JComboBox<>();
         boxListaComercios.setBorder(new EmptyBorder(10, 2, 10, 2));
         DefaultComboBoxModel modelBox = (DefaultComboBoxModel) boxListaComercios.getModel();
         boxListaComercios.setModel(modelBox);
+        boxListaComercios.setModel(modelBox);
         add(boxListaComercios);
-        botones = new PanelBotonesComercio(fieldNombreComercio.getText(),  
-                fieldCodigoComercio.getText(), 
-                fieldDescripcionComercio.getText(), 
-                datePicker.getJFormattedTextField().getText(), 
-                fieldUbicacionComercio.getText());
+        
+        botones = new PanelBotonesComercio();
         add(botones);
-
+    }
+    
+    public PanelBotonesComercio getBotones() {
+        return botones;
     }
 }
 

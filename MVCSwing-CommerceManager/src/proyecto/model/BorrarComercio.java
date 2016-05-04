@@ -17,17 +17,10 @@ import org.w3c.dom.NodeList;
  * BORRA UN COMERCIO DEL ARCHIVO XML
  */
 public class BorrarComercio extends ManageDocument {
-    public BorrarComercio(int codigoComercio) {
-    Document doc = manageDocument("archivoComercio.xml");  
-    try {
-        borrarRegistro(doc, codigoComercio);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    } 
-    public boolean borrarRegistro(Document document, int codigoTransaccion) throws TransformerException {
+  
+public void borrarRegistro(int codigoTransaccion) throws TransformerException {
+        Document document = manageDocument("archivoComercio.xml"); 
         File file = null;
-        boolean bool;
         int len = 0;
         Node parentNode = null;
         String codigoString = Integer.toString(codigoTransaccion);
@@ -62,12 +55,10 @@ public class BorrarComercio extends ManageDocument {
             // escribe a la consola para testing
             StreamResult consoleResult = new StreamResult(System.out);
             transformer.transform(source, consoleResult);
-            bool = true;
         }
         catch (Exception e) {
             e.printStackTrace();
-            bool = false;
+            System.err.println(e.getMessage());
         }
-    return bool;
     }
 }

@@ -13,14 +13,6 @@ public class Transaccion {
     private int numAutorizacion;
     private char estado;
 
-    public Transaccion(int codigo, Date fechaTiempoAutorizacion, double monto, int numAutorizacion, char estado) {
-        this.codigoComercio = codigo;
-        this.fechaTiempoAutorizacion = fechaTiempoAutorizacion;
-        this.monto = monto;
-        this.numAutorizacion = numAutorizacion;
-        this.estado = estado;
-    }
-
     public int getCodigo() {
         return codigoComercio;
     }

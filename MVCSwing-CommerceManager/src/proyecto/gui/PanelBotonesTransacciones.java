@@ -1,7 +1,5 @@
 package proyecto.gui;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -14,11 +12,8 @@ public class PanelBotonesTransacciones extends JPanel {
     private JButton agregarTransaccion;
     private JButton borrarTransaccion;
     private ButtonGroup grupoTransacciones;
-    
-    public PanelTransaccion thisTransaccion;
-    // botones para panelcomercio
 
-    public PanelBotonesTransacciones(PanelTransaccion transaccion) {
+    public PanelBotonesTransacciones() {
     
     agregarTransaccion = new JButton("Agregar Transaccion");
     borrarTransaccion = new JButton("Borrar Transaccion");
@@ -27,23 +22,13 @@ public class PanelBotonesTransacciones extends JPanel {
     grupoTransacciones.add(borrarTransaccion);
     add(agregarTransaccion);
     add(borrarTransaccion);
-    
-    thisTransaccion = transaccion;
     }    
+    
+    public JButton getAgregarTransaccion() {
+        return agregarTransaccion;
+    }
 
-    class ManejadorBotonTransaccion implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            if (e.getSource() == agregarTransaccion) {
-                String codigo = thisTransaccion.fieldCodigoComercio.getText();
-                String fechaHora = thisTransaccion.fieldFechaHora.getText();
-                String fechaLicencia = thisTransaccion.fieldFechaLicencia.getText();
-                String monto = thisTransaccion.fieldMonto.getText();
-                String numeroTrans = thisTransaccion.fieldTransaccion.getText();
-
-                
-            } else if (e.getSource() == borrarTransaccion) {
-                String codigo = thisTransaccion.fieldCodigoComercio.getText();
-            }
-        }
+    public JButton getBorrarTransaccion() {
+        return borrarTransaccion;
     }
 }

@@ -20,19 +20,10 @@ import org.w3c.dom.Element;
  */
 public class EscribeTransaccion extends ManageDocument {
     
-    public void EscribeTransaccion(int codigoComercio, Date fechaTiempoAutorizacion, 
-double monto, int numAutorizacion, char estado){ 
-        Document doc = manageDocument("archivoTransaccion.xml");
-        try {
-            writeData(doc, codigoComercio, fechaTiempoAutorizacion, monto, numAutorizacion, estado);
-        } catch (TransformerException ex) {
-            ex.getMessage();
-        }
-    }
-    
-    public boolean writeData(Document document, int codigoComercio, Date fechaTiempo, 
-double monto, int numAutorizacion, char estado)
+    public boolean writeData(int codigoComercio, Date fechaTiempo, 
+    double monto, int numAutorizacion, char estado)
             throws TransformerConfigurationException, TransformerException {
+        Document document = manageDocument("archivoTransaccion.xml");
         // escribe datos en el documento
         boolean test;
         File file = null;

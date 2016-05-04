@@ -19,20 +19,11 @@ import org.w3c.dom.Element;
  * ESCRIBE UN COMERCIO NUEVO EN EL ARCHIVO XML
  */
 public class EscribeComercio extends ManageDocument {
-    
-    public EscribeComercio(int codigo, String nombre, 
-String descripcion, Date fecha, Date fechaLicencia, String ubicacion, int telefono, char estado){ 
-        Document doc = manageDocument("archivoComercio.xml");
-        try {
-            writeData(doc, codigo, nombre, descripcion, fecha, fechaLicencia, ubicacion, telefono, estado);
-        } catch (TransformerException ex) {
-            ex.getMessage();
-        }
-    }
-    
-    public boolean writeData(Document document, int codigo, String nombre, 
+     
+    public boolean writeData(String nombreDocumento, int codigo, String nombre, 
 String descripcion, Date fecha, Date fechaLicencia, String ubicacion, int telefono, char estado)
             throws TransformerConfigurationException, TransformerException {
+        Document document = manageDocument(nombreDocumento);
         // escribe datos en el documento
         boolean test;
         File file = null;

@@ -15,16 +15,10 @@ import javax.xml.transform.stream.StreamResult;
  * @author andre
  * BORRA UNA TRANSACCION DEL DOCUMENTO XML
  */
-public class BorrarTransaccion extends ManageDocument {
-    public BorrarTransaccion(int codigoTransaccion) {
-    Document doc = manageDocument("archivoTransaccion.xml");  
-    try {
-        borrarRegistro(doc, codigoTransaccion);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    } 
-    public boolean borrarRegistro(Document document, int codigoTransaccion) {
+public class BorrarTransaccion extends ManageDocument {  
+
+    public boolean borrarRegistro(int codigoTransaccion) {
+        Document document = manageDocument("archivoTransaccion.xml");
         File file = null;
         boolean bool;
         int len = 0;

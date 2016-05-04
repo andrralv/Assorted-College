@@ -15,7 +15,7 @@ public class ClasePruebaTransaccion {
         Document doc = thisTransaccion.manageDocument("archivoTransaccion.xml");
         Date fecha = new Date();
 
-        boolean foo = thisTransaccion.writeData(doc, 1235, fecha, 123587, 555, 'O');
+        boolean foo = thisTransaccion.writeData(1235, fecha, 123587, 555, 'O');
         System.out.println(foo);
     }
 

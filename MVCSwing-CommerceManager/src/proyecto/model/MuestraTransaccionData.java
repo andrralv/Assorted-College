@@ -11,6 +11,7 @@ import org.w3c.dom.NodeList;
  * MUESTRA DATOS DE LA TRANSACCION SEGUN EL NUM DE TRANSACCION QUE SE INTRODUZCA
  */
 public class MuestraTransaccionData extends ManageDocument {
+    proyecto.Utilidades.getDate getFecha;
     public void MuestraTransaccionData(int codigo) {
         Document doc = manageDocument("archivoTransaccion.xml");
         }
@@ -40,11 +41,13 @@ public class MuestraTransaccionData extends ManageDocument {
                 nodes.item(y).getParentNode().removeChild(nodes.item(y));
                 }
             } 
+        getFecha = new proyecto.Utilidades.getDate();
+        
         // parsing datos y devolviendo un objeto comercio
         String codigoComercio = nodes.item(0).getTextContent();
         int codigoComercioInt = Integer.valueOf(codigoComercio);
         String fechaTransaccion = nodes.item(1).getTextContent();
-        Date fechaTransaccionDate = proyecto.Utilidades.Utilidades.getFecha(fechaTransaccion);
+        Date fechaTransaccionDate = getFecha.getFecha(fechaTransaccion, true);
         String montoTransaccion = nodes.item(2).getTextContent();
         double montoTransaccionDouble = Integer.valueOf(montoTransaccion);
         String numeroTransaccion = nodes.item(3).getTextContent();
@@ -52,8 +55,7 @@ public class MuestraTransaccionData extends ManageDocument {
         String estadoTransaccion = nodes.item(4).getTextContent();
         char estadoTransaccionChar = estadoTransaccion.charAt(0);
         
-        thisTransaccion = new Transaccion(codigoComercioInt, fechaTransaccionDate, montoTransaccionDouble, 
-                numeroTransaccionInt, estadoTransaccionChar);
+        thisTransaccion = new Transaccion();
         
         } catch (Exception e) {
                 e.printStackTrace();    

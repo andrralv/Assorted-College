@@ -23,17 +23,16 @@ public class PanelTransaccion extends JPanel {
     public JTextField fieldCodigoComercio;
     private JLabel labelFechaHora;
     public JTextField fieldFechaHora;
-    private JLabel labelFechaLicencia;
-    public JTextField fieldFechaLicencia;
     private JLabel labelMonto;
     public JTextField fieldMonto;
     private JLabel labelTransaccion;
     public JTextField fieldTransaccion;
     public JComboBox boxListaTransacciones;
     private PanelBotonesTransacciones botones;
-    private JComboBox estadosBoxT;
+    public JComboBox estadosBoxT;
     private String[] estados = {"", "Denegada", "Anulada", "Aprobada"};
     private JLabel estadosLabel;
+    public JDatePickerImpl datePickerTrans;
     
     
     public PanelTransaccion() {
@@ -65,7 +64,7 @@ public class PanelTransaccion extends JPanel {
         p.put("text.year", "Year");
         JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
         // picker 
-        JDatePickerImpl datePickerTrans = new JDatePickerImpl(datePanel, new proyecto.Utilidades.DateLabelFormatter());
+        datePickerTrans = new JDatePickerImpl(datePanel, new proyecto.Utilidades.DateLabelFormatter());
         add(datePickerTrans);
         // monto
         String montoTransaccion = "Monto: ";
@@ -92,21 +91,24 @@ public class PanelTransaccion extends JPanel {
         // dimension
         Dimension dimension = new Dimension(300, 200);
         // lista estados 
-        estadosBoxT = new JComboBox(estados);
+        estadosBoxT = new JComboBox<>(estados);
         estadosBoxT.setMaximumSize(dimension);
         add(estadosBoxT);
         // transacciones
         transaccionesLabel = new JLabel("Transacciones: ");
         transaccionesLabel.setAlignmentX(Component.RIGHT_ALIGNMENT); 
         add(transaccionesLabel);
-        // lista transacciones
+        // lista dinamica de transacciones
         boxListaTransacciones = new JComboBox();
         boxListaTransacciones.setBorder(new EmptyBorder(10, 2, 10, 2));
         boxListaTransacciones.setMaximumSize(dimension);
         add(boxListaTransacciones);
         //
-        botones = new PanelBotonesTransacciones(this);
-        add(botones);
-        //
+        botones = new PanelBotonesTransacciones();
+        add(botones);     
+    }
+    
+    public PanelBotonesTransacciones getBotones() {
+        return botones;
     }
 }
