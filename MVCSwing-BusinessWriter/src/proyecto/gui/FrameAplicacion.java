@@ -124,6 +124,38 @@ public class FrameAplicacion extends JFrame{
         return panelTop.boxListaComercios.getSelectedItem().toString();
     }
     
+    // *************** SETTERS DE ELEMENTOS EN COMERCIO ****************
+    
+    public void setNombreComercio(String nombre) {
+        panelTop.fieldNombreComercio.setText(nombre);
+    }
+    
+    public void setCodigoComercio(String codigo) {
+        panelTop.fieldCodigoComercio.setText(codigo);
+    }
+    
+    public void setTelefonoComercio(String telefono) {
+        panelTop.fieldTelefonoComercio.setText(telefono);
+    }
+    
+    public void setUbicacionComercio(String ubicacion) {
+        panelTop.fieldUbicacionComercio.setText(ubicacion);
+    }
+    
+    public void setDescripcionComercio(String descripcion) {
+        panelTop.fieldDescripcionComercio.setText(descripcion);
+    }
+    
+    public void setEstadoComercio(char estado) {
+        int index = 0;
+        if (estado == 'A'){
+            index = 1;
+        } else if (estado == 'I') {
+            index = 2;
+        }
+        panelTop.estadosBox.setSelectedIndex(index);
+    }
+    
     // ************ AGREGAR LISTENERS A BOTONES COMERCIO ***************
     
     public void addListenerAgregarComercio(ActionListener listener) {
@@ -159,36 +191,33 @@ public class FrameAplicacion extends JFrame{
         return panelBottom.boxListaTransacciones.getSelectedItem().toString();
     }
     
-    // *************** SETTERS DE ELEMENTOS EN COMERCIO ****************
     
-    public void setNombreComercio(String nombre) {
-        panelTop.fieldNombreComercio.setText(nombre);
+    // ************ SETTERS DE ELEMENTOS EN TRANSACCION **************
+    
+    public void setTransNumeroComercio(String codigo) {
+        panelBottom.fieldCodigoComercio.setText(codigo);
     }
     
-    public void setCodigoComercio(String codigo) {
-        panelTop.fieldCodigoComercio.setText(codigo);
+    public void setTransMonto(String monto) {
+        panelBottom.fieldMonto.setText(monto);
     }
     
-    public void setTelefonoComercio(String telefono) {
-        panelTop.fieldTelefonoComercio.setText(telefono);
+    public void setTransNumero(String numero) {
+        panelBottom.fieldTransaccion.setText(numero);
     }
     
-    public void setUbicacionComercio(String ubicacion) {
-        panelTop.fieldUbicacionComercio.setText(ubicacion);
-    }
-    
-    public void setDescripcionComercio(String descripcion) {
-        panelTop.fieldDescripcionComercio.setText(descripcion);
-    }
-    
-    public void setEstadoComercio(char estado) {
-        int index = 0;
-        if (estado == 'A'){
-            index = 1;
-        } else if (estado == 'I') {
-            index = 2;
-        }
-        panelTop.estadosBox.setSelectedIndex(index);
+       public void setEstadoTrans(char estado) {
+        int index;
+        switch(estado){
+            case 'D': index = 1;
+            break;
+            case 'N': index = 2;
+            break;
+            case 'A': index = 3;
+            break;
+            default: index = 0;
+                    }
+        panelBottom.estadosBoxT.setSelectedIndex(index);
     }
     
     // ************ AGREGAR LISTENERS A BOTONES TRANSACCION ***************
@@ -219,5 +248,11 @@ public class FrameAplicacion extends JFrame{
     public void addListenerItemComercio(ItemListener listener) {
         panelTop.getComerciosBox().addItemListener(listener);
     }
+    
+    public void addListenerItemTransaccion(ItemListener listener) {
+        panelBottom.getTransaccionesBox().addItemListener(listener);
+    }
+    
+    // *********** TEXT FIELDS DE TRANSACCION // ***************
     
 }

@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class ObjetoControlador {
     private proyecto.gui.FrameAplicacion theView;
-    private proyecto.model.Modelo theModel; ;
+    private proyecto.model.Modelo theModel;
     
     public ObjetoControlador(proyecto.gui.FrameAplicacion theView, proyecto.model.Modelo theModel) {
         this.theView = theView;
@@ -19,25 +19,31 @@ public class ObjetoControlador {
         this.theView.addListenerAgregarTransaccion(new TransaccionListener());
         this.theView.addListenerBorrarTransaccion(new BorrarTransListener());
         this.theView.addListenerItemComercio(new ItemsComercioListener());
-        
+        this.theView.addListenerItemTransaccion(new ItemsTransaccionListener());        
         // agregar itemes a jcombobox comercio - implementar con arraylist
         
+        getComercios();
+            }
+    
+    public void getComercios() {
         this.theModel.muestraComercioData.showData();
         if ((this.theModel.muestraComercioData.listaComercios != null) || !(this.theModel.muestraComercioData.listaComercios.isEmpty())){
                     for (int i = 0; i < this.theModel.muestraComercioData.listaComercios.size(); i++) {
                         this.theView.getComerciosLista().addItem(this.theModel.muestraComercioData.listaComercios.get(i).getNombre());
                     }
                 }
-        
+            }
+    
+    public void getTransacciones(String num) {
         // agregar itemes a jcombobox transaccion
-        this.theModel.muestraTransaccionData.showData();
+        this.theView.getTransaccionesLista().removeAllItems();
+        this.theModel.muestraTransaccionData.showData(num);
         if ((this.theModel.muestraTransaccionData.listaTransacciones != null) || !(this.theModel.muestraComercioData.listaComercios.isEmpty())) {
-                for (int i = 0; i < this.theModel.muestraTransaccionData.listaTransacciones.size(); i++) {
+            for (int i = 0; i < this.theModel.muestraTransaccionData.listaTransacciones.size(); i++) {
                     this.theView.getTransaccionesLista().addItem(this.theModel.muestraTransaccionData.listaTransacciones.get(i).getNumAutorizacion());
                 }
             }
         }
-    
     
     class ComercioListener implements ActionListener {
 
@@ -54,13 +60,12 @@ public class ObjetoControlador {
                  Date fLDate = theView.getFechaComercioLicencia();
                  
                 theModel.escribeComercio.writeData("archivoComercio.xml", Integer.valueOf(codigo), nombre, descripcion, fCDate, fLDate, ubicacion, Integer.valueOf(telefono), estado);
-                theView.displayMessage("Un nuevo comercio se ha agregado a la base de datos"); 
-                 
+                theView.displayMessage("Un nuevo comercio se ha agregado a la base de datos");
+              
              } catch (Exception e) {
                  theView.displayErrorMessage("Se ha producido un error: \n" + e.getMessage());
              }
         }
-        
     }
     
     class BorrarComercioListener implements ActionListener {
@@ -120,6 +125,7 @@ public class ObjetoControlador {
             if (ie.getStateChange() == ItemEvent.SELECTED) {
                 String elComercio = ie.getItem().toString();
                 proyecto.model.Comercio thisComercio = theModel.muestraComercioData.getItemData(elComercio);
+                getTransacciones(Integer.toString(thisComercio.getCodigo()));
                 if (thisComercio != null) {
                     theView.setNombreComercio(thisComercio.getNombre());
                     theView.setCodigoComercio(Integer.toString(thisComercio.getCodigo()));
@@ -127,8 +133,31 @@ public class ObjetoControlador {
                     theView.setDescripcionComercio(thisComercio.getDescripcion());
                     theView.setUbicacionComercio(thisComercio.getUbicacion());
                     theView.setEstadoComercio(thisComercio.getEstado());
+
                 } else {
                     theView.displayErrorMessage("No se encontro el comercio");
+                }
+            }
+        }
+    
+    }
+    
+    class ItemsTransaccionListener implements ItemListener {
+
+        @Override
+        public void itemStateChanged(ItemEvent ie) {
+            if (ie.getStateChange() == ItemEvent.SELECTED) {
+                String elTransaccion = ie.getItem().toString();
+                String numComercio = theView.getCodigoComercio();
+                proyecto.model.Transaccion thisTransaccion = theModel.muestraTransaccionData.getItemData(elTransaccion);
+                if (thisTransaccion != null) {
+                    theView.setTransNumeroComercio(Integer.toString(thisTransaccion.getCodigo()));
+                    theView.setTransMonto(Double.toString(thisTransaccion.getMonto()));
+                    theView.setTransNumero(Integer.toString(thisTransaccion.getNumAutorizacion()));
+                    theView.setEstadoTrans(thisTransaccion.getEstado());
+
+                } else {
+                    theView.displayErrorMessage("No se encontro la transaccion");
                 }
             }
         }

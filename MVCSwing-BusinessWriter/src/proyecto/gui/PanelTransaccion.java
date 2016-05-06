@@ -30,7 +30,7 @@ public class PanelTransaccion extends JPanel {
     public JComboBox boxListaTransacciones;
     private PanelBotonesTransacciones botones;
     public JComboBox estadosBoxT;
-    private String[] estados = {"", "Denegada", "Anulada", "Aprobada"};
+    private String[] estados = {"", "Denegada", "Nula", "Aprobada"};
     private JLabel estadosLabel;
     public JDatePickerImpl datePickerTrans;
     
