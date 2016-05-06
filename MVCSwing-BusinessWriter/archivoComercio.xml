@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<comercios>
+    <comercio>
+        <codigo-comercio>6666</codigo-comercio>
+        <nombre-comercio>Perra Pop</nombre-comercio>
+        <descripcion>"quiero sentirme parte de algo"</descripcion>
+        <fecha-creacion>2016-05-11 00:00:00</fecha-creacion>
+        <licencia-comercio>2016-05-13 00:00:00</licencia-comercio>
+        <ubicacion>El lobo Estepario</ubicacion>
+        <telefono>85356985</telefono>
+        <estado>A</estado>
+    </comercio>
+</comercios>

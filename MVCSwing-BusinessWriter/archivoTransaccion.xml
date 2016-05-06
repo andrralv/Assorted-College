@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<transacciones>
+    
+<transaccion numero="0">
+        <codigo-comercio>515156</codigo-comercio>
+        <fecha-transaccion>0002-11-30 00:00:00</fecha-transaccion>
+        <monto>50000.0</monto>
+        <numero-transaccion>42424</numero-transaccion>
+        <estado-transaccion>A</estado-transaccion>
+    </transaccion>
+<transaccion numero="1">
+        <codigo-comercio>21414</codigo-comercio>
+        <fecha-transaccion>2016-05-18 00:00:00</fecha-transaccion>
+        <monto>5050.0</monto>
+        <numero-transaccion>505252</numero-transaccion>
+        <estado-transaccion>A</estado-transaccion>
+    </transaccion>
+</transacciones>
