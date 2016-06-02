@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<comercios>
+    <comercio>
+            <codigo-comercio>1</codigo-comercio>
+            <nombre-comercio>Perra Pop</nombre-comercio>
+            <descripcion>Fragmentos de destino y sensualidad espiritual</descripcion>
+            <fecha-creacion>2016-05-27 00:00:00</fecha-creacion>
+            <licencia-comercio>2016-05-28 00:00:00</licencia-comercio>
+            <ubicacion>San Jose</ubicacion>
+            <telefono>85659585</telefono>
+            <estado>A</estado>
+        </comercio>
+    <comercio>
+            <codigo-comercio>2</codigo-comercio>
+            <nombre-comercio>Club Bello Horizonte</nombre-comercio>
+            <descripcion>Un saludo para mis amigos de escazu</descripcion>
+            <fecha-creacion>2016-05-26 00:00:00</fecha-creacion>
+            <licencia-comercio>2016-05-28 00:00:00</licencia-comercio>
+            <ubicacion>Bello Horizonte de Escazu</ubicacion>
+            <telefono>85656545</telefono>
+            <estado>A</estado>
+    </comercio>
+</comercios>

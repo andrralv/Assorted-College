@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<transacciones>
+    <transaccion numero="0">
+        <codigo-comercio>1</codigo-comercio>
+        <fecha-transaccion>0002-11-30 00:00:00</fecha-transaccion>
+        <monto>5000.0</monto>
+        <numero-transaccion>11</numero-transaccion>
+        <estado-transaccion>A</estado-transaccion>
+    </transaccion>
+    <transaccion numero="1">
+        <codigo-comercio>2</codigo-comercio>
+        <fecha-transaccion>0002-11-30 00:00:00</fecha-transaccion>
+        <monto>100000.0</monto>
+        <numero-transaccion>12</numero-transaccion>
+        <estado-transaccion>A</estado-transaccion>
+    </transaccion>
+<transaccion numero="2">
+        <codigo-comercio>1</codigo-comercio>
+        <fecha-transaccion>0002-11-30 00:00:00</fecha-transaccion>
+        <monto>80000.0</monto>
+        <numero-transaccion>13</numero-transaccion>
+        <estado-transaccion>A</estado-transaccion>
+    </transaccion>
+<transaccion numero="3">
+        <codigo-comercio>2</codigo-comercio>
+        <fecha-transaccion>0002-11-30 00:00:00</fecha-transaccion>
+        <monto>7000.0</monto>
+        <numero-transaccion>14</numero-transaccion>
+        <estado-transaccion>A</estado-transaccion>
+    </transaccion>
+<transaccion numero="4">
+        <codigo-comercio>2</codigo-comercio>
+        <fecha-transaccion>0002-11-30 00:00:00</fecha-transaccion>
+        <monto>5000000.0</monto>
+        <numero-transaccion>16</numero-transaccion>
+        <estado-transaccion>N</estado-transaccion>
+    </transaccion>
+</transacciones>
