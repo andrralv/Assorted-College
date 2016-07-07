@@ -1,0 +1,6 @@
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\TestingAccounts\TestingAccounts\bin\Debug\TestingAccounts.exe.config
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\TestingAccounts\TestingAccounts\bin\Debug\TestingAccounts.exe
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\TestingAccounts\TestingAccounts\bin\Debug\TestingAccounts.pdb
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\TestingAccounts\TestingAccounts\obj\Debug\TestingAccounts.exe
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\TestingAccounts\TestingAccounts\obj\Debug\TestingAccounts.pdb
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\TestingAccounts\TestingAccounts\obj\Debug\TestingAccounts.csprojResolveAssemblyReference.cache
