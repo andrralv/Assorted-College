@@ -1,0 +1,21 @@
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\PruebaGUI\PremiumServidor\bin\Debug\PremiumServidor.exe.config
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\PruebaGUI\PremiumServidor\bin\Debug\PremiumServidor.exe
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\PruebaGUI\PremiumServidor\bin\Debug\PremiumServidor.pdb
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\PruebaGUI\PremiumServidor\obj\Debug\PremiumServidor.Form1.resources
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\PruebaGUI\PremiumServidor\obj\Debug\PremiumServidor.Form2.resources
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\PruebaGUI\PremiumServidor\obj\Debug\PremiumServidor.Form3.resources
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\PruebaGUI\PremiumServidor\obj\Debug\PremiumServidor.Properties.Resources.resources
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\PruebaGUI\PremiumServidor\obj\Debug\PremiumServidor.csproj.GenerateResource.Cache
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\PruebaGUI\PremiumServidor\obj\Debug\PremiumServidor.exe
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\PruebaGUI\PremiumServidor\obj\Debug\PremiumServidor.pdb
+C:\Users\andre\Documents\Programacion\2016 II cuatri\Programacion Avanzada\TransportesPremium\PremiumServidor\bin\Debug\PremiumServidor.exe.config
+C:\Users\andre\Documents\Programacion\2016 II cuatri\Programacion Avanzada\TransportesPremium\PremiumServidor\obj\Debug\PremiumServidor.exe
+C:\Users\andre\Documents\Programacion\2016 II cuatri\Programacion Avanzada\TransportesPremium\PremiumServidor\obj\Debug\PremiumServidor.pdb
+C:\Users\andre\Documents\Programacion\2016 II cuatri\Programacion Avanzada\TransportesPremium\PremiumServidor\bin\Debug\PremiumServidor.exe
+C:\Users\andre\Documents\Programacion\2016 II cuatri\Programacion Avanzada\TransportesPremium\PremiumServidor\bin\Debug\PremiumServidor.pdb
+C:\Users\andre\Documents\Programacion\2016 II cuatri\Programacion Avanzada\TransportesPremium\PremiumServidor\obj\Debug\PremiumServidor.csprojResolveAssemblyReference.cache
+C:\Users\andre\Documents\Programacion\2016 II cuatri\Programacion Avanzada\TransportesPremium\PremiumServidor\obj\Debug\PremiumServidor.Form1.resources
+C:\Users\andre\Documents\Programacion\2016 II cuatri\Programacion Avanzada\TransportesPremium\PremiumServidor\obj\Debug\PremiumServidor.Form2.resources
+C:\Users\andre\Documents\Programacion\2016 II cuatri\Programacion Avanzada\TransportesPremium\PremiumServidor\obj\Debug\PremiumServidor.Form3.resources
+C:\Users\andre\Documents\Programacion\2016 II cuatri\Programacion Avanzada\TransportesPremium\PremiumServidor\obj\Debug\PremiumServidor.Properties.Resources.resources
+C:\Users\andre\Documents\Programacion\2016 II cuatri\Programacion Avanzada\TransportesPremium\PremiumServidor\obj\Debug\PremiumServidor.csproj.GenerateResource.Cache

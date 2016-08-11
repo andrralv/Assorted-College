@@ -1,0 +1,10 @@
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\PruebaGUI\PruebaGUI\bin\Debug\PruebaGUI.exe.config
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\PruebaGUI\PruebaGUI\bin\Debug\PruebaGUI.exe
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\PruebaGUI\PruebaGUI\bin\Debug\PruebaGUI.pdb
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\PruebaGUI\PruebaGUI\obj\Debug\PruebaGUI.csprojResolveAssemblyReference.cache
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\PruebaGUI\PruebaGUI\obj\Debug\PruebaGUI.Form1.resources
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\PruebaGUI\PruebaGUI\obj\Debug\PruebaGUI.Properties.Resources.resources
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\PruebaGUI\PruebaGUI\obj\Debug\PruebaGUI.csproj.GenerateResource.Cache
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\PruebaGUI\PruebaGUI\obj\Debug\PruebaGUI.exe
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\PruebaGUI\PruebaGUI\obj\Debug\PruebaGUI.pdb
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\PruebaGUI\PruebaGUI\obj\Debug\PruebaGUI.Form2.resources

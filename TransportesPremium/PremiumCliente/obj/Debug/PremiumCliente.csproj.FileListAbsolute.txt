@@ -1,0 +1,20 @@
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\PruebaGUI\PruebaGUI\bin\Debug\PruebaGUI.exe.config
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\PruebaGUI\PruebaGUI\obj\Debug\PruebaGUI.exe
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\PruebaGUI\PruebaGUI\obj\Debug\PruebaGUI.pdb
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\PruebaGUI\PruebaGUI\bin\Debug\PruebaGUI.exe
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\PruebaGUI\PruebaGUI\bin\Debug\PruebaGUI.pdb
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\PruebaGUI\PruebaGUI\obj\Debug\PremiumCliente.csprojResolveAssemblyReference.cache
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\PruebaGUI\PruebaGUI\obj\Debug\PruebaGUI.Form1.resources
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\PruebaGUI\PruebaGUI\obj\Debug\PruebaGUI.Form2.resources
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\PruebaGUI\PruebaGUI\obj\Debug\PruebaGUI.Properties.Resources.resources
+C:\Users\andre\visual studio 2015\Projects\HelloWorld\PruebaGUI\PruebaGUI\obj\Debug\PremiumCliente.csproj.GenerateResource.Cache
+C:\Users\andre\Documents\Programacion\2016 II cuatri\Programacion Avanzada\TransportesPremium\PremiumCliente\bin\Debug\PruebaGUI.exe.config
+C:\Users\andre\Documents\Programacion\2016 II cuatri\Programacion Avanzada\TransportesPremium\PremiumCliente\obj\Debug\PruebaGUI.exe
+C:\Users\andre\Documents\Programacion\2016 II cuatri\Programacion Avanzada\TransportesPremium\PremiumCliente\obj\Debug\PruebaGUI.pdb
+C:\Users\andre\Documents\Programacion\2016 II cuatri\Programacion Avanzada\TransportesPremium\PremiumCliente\bin\Debug\PruebaGUI.exe
+C:\Users\andre\Documents\Programacion\2016 II cuatri\Programacion Avanzada\TransportesPremium\PremiumCliente\bin\Debug\PruebaGUI.pdb
+C:\Users\andre\Documents\Programacion\2016 II cuatri\Programacion Avanzada\TransportesPremium\PremiumCliente\obj\Debug\PremiumCliente.csprojResolveAssemblyReference.cache
+C:\Users\andre\Documents\Programacion\2016 II cuatri\Programacion Avanzada\TransportesPremium\PremiumCliente\obj\Debug\PruebaGUI.Form1.resources
+C:\Users\andre\Documents\Programacion\2016 II cuatri\Programacion Avanzada\TransportesPremium\PremiumCliente\obj\Debug\PruebaGUI.Form2.resources
+C:\Users\andre\Documents\Programacion\2016 II cuatri\Programacion Avanzada\TransportesPremium\PremiumCliente\obj\Debug\PruebaGUI.Properties.Resources.resources
+C:\Users\andre\Documents\Programacion\2016 II cuatri\Programacion Avanzada\TransportesPremium\PremiumCliente\obj\Debug\PremiumCliente.csproj.GenerateResource.Cache
