@@ -18,3 +18,4 @@ Also stores employee objects in a list.
 <b>Project 7</b> -- Business Writer Program. Takes Business entries and writes their info on a XML database.
 Also takes transactions and writes them on another XML database. Uses dynamic lists to update and view business info on screen. Fully done using MVC pattern. 
 
+test
